@@ -4,6 +4,7 @@ local UEHelpers = require("UEHelpers")
 Calibur.character   = require("modules.character")
 Calibur.structs     = require("modules.structs")
 Calibur.discord     = require("modules.discord")
+Calibur.text        = require("modules.text")
 
 function Calibur.GetBattleManager()
     local manager_instance = FindFirstOf("LuxBattleManager")
@@ -11,7 +12,7 @@ function Calibur.GetBattleManager()
 end
 
 function Calibur.GetBattleSetupPreviewCharaManager()
-    local preview_instance = FindFirstOf("BP_LuxBattleSetupPreviewCharaManager")
+    local preview_instance = FindFirstOf("BP_LuxBattleSetupPreviewCharaManager_C")
     return preview_instance
 end
 
