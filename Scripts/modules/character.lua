@@ -17,7 +17,7 @@ end
 
 function Character.GetCharacterName(player_setup)
     local char_profile = player_setup.CreationProfile
-    return char_profile.characterName
+    return char_profile.characterName:ToString()
 end
 
 return Character
