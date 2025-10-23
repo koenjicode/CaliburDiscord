@@ -1,5 +1,7 @@
 local calibur = require("modules.calibur")
 
+local preview_character_present = false
+
 local function get_activity_info()
     local level_name = calibur.GetLevelName()
 
@@ -16,11 +18,6 @@ local function get_activity_info()
 
             char_id = calibur.character.GetCharacterID(character)
             print(char_id)
-
-            if calibur.structs.IsBlacklisted(char_id) then
-                -- Random fallback ID
-                char_id = 999
-            end
         end
 
         local action = "VS CPU"
@@ -29,7 +26,7 @@ local function get_activity_info()
             if calibur.IsMockBattle() then
                 action = "Mock Battle"
             else
-                action = "Training"
+                action = "Training Mode"
             end
         elseif calibur.IsLocalPVP() then
             action = "Local Versus"
@@ -47,8 +44,18 @@ local function get_activity_info()
 
         -- Additional presence if character index is valid
         if char_id then
-            presence.smallImageKey = char_id
-            presence.smallImageText = calibur.structs.GetCharacterText(char_id)
+            if calibur.IsUsingCreation() then
+                local name = calibur.GetCharacterName()
+                if calibur.text.IsAllUppercase(name) then
+                    name = calibur.text.FormatText(name)
+                end
+                local style = calibur.structs.GetCharacterText(char_id)
+                presence.smallImageKey = "999"
+                presence.smallImageText = string.format("%s (%s)", name, style)
+            else
+                presence.smallImageKey = char_id
+                presence.smallImageText = calibur.structs.GetCharacterText(char_id)
+            end
         end
 
         return presence
@@ -63,9 +70,11 @@ local function get_activity_info()
 
     -- In Character Select
     if level_name == "BattleSetup" then
-        return {
-            state = "Character Select"
-        }
+        if preview_character_present then
+            return {
+                state = "Character Select"
+            }
+        end
     end
 
 
@@ -76,17 +85,20 @@ local function get_activity_info()
     }
 end
 
+NotifyOnNewObject("/Game/UI/Preview/BP_LuxPreviewCharaStudio.BP_LuxPreviewCharaStudio_C", function(ConstructedObject)
+    preview_character_present = true
+    print(string.format("Constructed: %s\n", ConstructedObject:GetFullName()))
+    if true then
+
+    end
+end)
+
 RegisterHook("/Script/Engine.PlayerController:ClientRestart", function()
+    preview_character_present = false
     ExecuteWithDelay(1000, function()
         print(calibur.GetLevelName())
         calibur.discord.UpdatePresence(get_activity_info())
     end)
-end)
-
-
-
-RegisterHook("/Script/LuxorGame.LuxBattleLevelScriptActor:OnRoundStarted", function()
-    print("Battle Restarted")
 end)
 
 calibur.discord.Initialise(1430288174047039510, 544750)
