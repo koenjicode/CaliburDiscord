@@ -70,28 +70,16 @@ local function get_activity_info()
 
     -- In Character Select
     if level_name == "BattleSetup" then
-        if preview_character_present then
-            return {
-                state = "Character Select"
-            }
-        end
+        return {
+            state = "Preparing"
+        }
     end
-
-
 
     -- Unknown State
     return {
         state = "Waiting",
     }
 end
-
-NotifyOnNewObject("/Game/UI/Preview/BP_LuxPreviewCharaStudio.BP_LuxPreviewCharaStudio_C", function(ConstructedObject)
-    preview_character_present = true
-    print(string.format("Constructed: %s\n", ConstructedObject:GetFullName()))
-    if true then
-
-    end
-end)
 
 RegisterHook("/Script/Engine.PlayerController:ClientRestart", function()
     preview_character_present = false

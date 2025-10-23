@@ -47,6 +47,10 @@ function Calibur.IsLocalPVP()
     return (bs.PlayerLeft.InputDeviceID >= 0 and bs.PlayerRight.InputDeviceID >= 0)
 end
 
+function Calibur.GetPreviewPlayerSide()
+    return 1
+end
+
 function Calibur.GetPlayerSide()
     local bs = Calibur.GetBattleSetup()
 
