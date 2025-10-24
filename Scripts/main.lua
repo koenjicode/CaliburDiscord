@@ -42,6 +42,9 @@ local function get_activity_info()
             -- Similar check, but we flip the Creation character check to see if they're playing as a regular character instead.
         elseif calibur.IsStoryMode() then
             action = "Soul Chronicle"
+            -- Check if the ReplayManager is actively playing back a match.
+        elseif calibur.IsReplayMatch() then
+            action = "Watching Replay"
             -- Check if the Timer is infinite and it uses a specific draw behaviour.
         elseif calibur.IsArcadeMode() then
             action = "Arcade Mode"
@@ -57,6 +60,12 @@ local function get_activity_info()
         else
             -- And if all of these things fail, then they're playing a regular, ordinary, boring CPU match.
             action = "VS CPU"
+        end
+
+        -- Online doesn't utilise the Controller indexes I heavily rely on when checking things offline.
+        -- We'll try and figure out specific network match stuff at a later date.
+        if network_environment == "Online" then
+            action = "Networked Match"
         end
 
         -- Base presence

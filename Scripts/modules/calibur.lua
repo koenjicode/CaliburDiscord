@@ -56,6 +56,11 @@ function Calibur.GetPreviewPlayerSide()
     return 1
 end
 
+function Calibur.IsReplayMatch()
+    local bs = Calibur.GetBattleSetup()
+    return bs.BattleReplay.bPlayingBack
+end
+
 function Calibur.IsArcadeMode()
     local br = Calibur.GetBattleRules()
     return br.Time == -1 and br.BattleDrawType == 2
