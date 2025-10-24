@@ -20,6 +20,13 @@ local function get_activity_info()
             print(char_id)
         end
 
+        local network_environment = nil
+        if calibur.IsOnlineMatch() then
+            network_environment = "Online"
+        else
+            network_environment = "Offline"
+        end
+
         local action = nil
         -- Check if we're in training mode.
         if calibur.IsTrainingMode() then
@@ -31,10 +38,10 @@ local function get_activity_info()
             end
             -- Check if the Player is using a Creation character with the special outro flag.
         elseif calibur.IsLibraMode() then
-            action = "Soul Chronicle"
+            action = "Libra of Soul"
             -- Similar check, but we flip the Creation character check to see if they're playing as a regular character instead.
         elseif calibur.IsStoryMode() then
-            action = "Libra of Soul"
+            action = "Soul Chronicle"
             -- Check if the Timer is infinite and it uses a specific draw behaviour.
         elseif calibur.IsArcadeMode() then
             action = "Arcade Mode"
@@ -54,7 +61,7 @@ local function get_activity_info()
 
         -- Base presence
         local presence = {
-            state = "Battle: " .. action,
+            state = string.format("%s: %s", network_environment, action),
             startTimestamp = os.time(),
             largeImageKey = string.lower(level_name),
             largeImageText = calibur.structs.GetStageText(level_name),
