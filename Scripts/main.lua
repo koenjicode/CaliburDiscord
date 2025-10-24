@@ -20,18 +20,36 @@ local function get_activity_info()
             print(char_id)
         end
 
-        local action = "VS CPU"
-
+        local action = nil
+        -- Check if we're in training mode.
         if calibur.IsTrainingMode() then
+            -- If we are, check the stage to see if we're in a mock battle.
             if calibur.IsMockBattle() then
                 action = "Mock Battle"
             else
                 action = "Training Mode"
             end
+            -- Check if the Player is using a Creation character with the special outro flag.
+        elseif calibur.IsLibraMode() then
+            action = "Soul Chronicle"
+            -- Similar check, but we flip the Creation character check to see if they're playing as a regular character instead.
+        elseif calibur.IsStoryMode() then
+            action = "Libra of Soul"
+            -- Check if the Timer is infinite and it uses a specific draw behaviour.
+        elseif calibur.IsArcadeMode() then
+            action = "Arcade Mode"
+            -- Check if both player characters have any skills equipped.
+        elseif calibur.IsSpecialMatch() then
+            action = "Special Versus"
+            -- Checks if both players have controller indexes.
         elseif calibur.IsLocalPVP() then
             action = "Local Versus"
+            -- Checks if both players DON'T have controller indexes.
         elseif calibur.IsCPUMatch() then
             action = "CPU VS CPU"
+        else
+            -- And if all of these things fail, then they're playing a regular, ordinary, boring CPU match.
+            action = "VS CPU"
         end
 
         -- Base presence

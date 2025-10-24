@@ -17,8 +17,13 @@ function Calibur.GetBattleSetupPreviewCharaManager()
 end
 
 function Calibur.GetBattleSetup()
-    local bm = FindFirstOf("LuxBattleManager")
+    local bm = Calibur.GetBattleManager()
     return bm.BattleSetupOverride
+end
+
+function Calibur.GetBattleRules()
+    local bs = Calibur.GetBattleSetup()
+    return bs.BattleRule
 end
 
 function Calibur.GetLevelName()
@@ -51,17 +56,40 @@ function Calibur.GetPreviewPlayerSide()
     return 1
 end
 
+function Calibur.IsArcadeMode()
+    local br = Calibur.GetBattleRules()
+    return br.Time == -1 and br.BattleDrawType == 2
+end
+
+function Calibur.IsSpecialMatch()
+    local br = Calibur.GetBattleRules()
+    return br.PlayerParams[1].ExtraParam.Skills:GetArrayNum() > 0 and br.PlayerParams[2].ExtraParam.Skills:GetArrayNum() > 0
+end
+
+function Calibur.IsStoryMode()
+    local bs = Calibur.GetBattleSetup()
+    return bs.BattleRule.OutroType == 7 and not Calibur.character.IsCreation(bs.PlayerLeft)
+end
+
+function Calibur.IsLibraMode()
+    local bs = Calibur.GetBattleSetup()
+    return bs.BattleRule.OutroType == 7 and Calibur.character.IsCreation(bs.PlayerLeft)
+end
+
 function Calibur.GetPlayerSide()
     local bs = Calibur.GetBattleSetup()
 
+    -- In training mode, both controllers can end up being valid, this ensure that we only look at Player 1.
     if Calibur.IsTrainingMode() then
         return 1
     end
 
+    -- If we're playing a local match where two controller inputs are present, we just want to set this to 0.
     if Calibur.IsLocalPVP() then
         return 0
     end
 
+    -- 1 and 2 for Player 1 and Player 2 respectively
     if bs.PlayerLeft.InputDeviceID >= 0 then
         return 1
     elseif bs.PlayerRight.InputDeviceID >= 0 then
@@ -89,11 +117,6 @@ end
 function Calibur.GetCharacterName()
     local ps = Calibur.GetPlayerSetup()
     return Calibur.character.GetCharacterName(ps)
-end
-
-function Calibur.IsOnlineMatch()
-    local bm = Calibur.GetBattleManager()
-    return bm:IsOnline()
 end
 
 function Calibur.IsOnlineMatch()
