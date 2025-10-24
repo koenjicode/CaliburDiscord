@@ -11,12 +11,12 @@ CaliburDiscord is a Lua-based plugin that adds Discord Rich Presence integration
 
 - UE4SS (Universal Unreal Engine 4 Script System)
 
-You must download the latest experimental-latest build [here][https://duckduckgo.com](https://github.com/UE4SS-RE/RE-UE4SS/releases/tag/experimental-latest).
+You must download the latest experimental-latest build [here](https://github.com/UE4SS-RE/RE-UE4SS/tree/experimental-latest).
 
 ## Installation
 
-- Download and install UE4SS (experimental-latest).
-- Place the CaliburDiscord plugin folder into your SOULCALIBUR VI\UE4SS\Mods directory.
+- Download and install [UE4SS (experimental-latest)](https://github.com/UE4SS-RE/RE-UE4SS/tree/experimental-latest).
+- Place the CaliburDiscord plugin folder into your `SoulcaliburVI\Binaries\Win64\ue4ss\Mods\CaliburDiscord` directory (needs to be inside of a CaliburDiscord folder)
 - Launch the game: Discord Rich Presence will initialise automatically when a battle starts.
 
 You should now see SOULCALIBUR VI activity on your Discord profile!
