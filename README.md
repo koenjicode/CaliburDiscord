@@ -1,5 +1,5 @@
 # CaliburDiscord
-![DiscordCalibur](https://cdn.discordapp.com/attachments/538804356871618650/1431101714454413353/image.png?ex=68fc30d5&is=68fadf55&hm=4ab2417bb6f35b3f7762c4f6b0d0b151400007198aeb0b7fdb014cba9f8f1ee8& "DiscordCalibur")
+![](Images/preview.webp)
 
 CaliburDiscord is a Lua-based plugin that adds Discord Rich Presence integration into SOULCALIBUR VI, allowing your current in-game activity to be displayed directly on your Discord profile.
 
