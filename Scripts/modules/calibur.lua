@@ -5,6 +5,7 @@ Calibur.character   = require("modules.character")
 Calibur.structs     = require("modules.structs")
 Calibur.discord     = require("modules.discord")
 Calibur.text        = require("modules.text")
+Calibur.vodkalibur  = require("modules.vodkalibur")
 
 function Calibur.GetBattleManager()
     local manager_instance = FindFirstOf("LuxBattleManager")

@@ -78,6 +78,9 @@ local function get_activity_info()
 
         -- Additional presence if character index is valid
         if char_id then
+            -- Check for Vodkalibur replacement
+            char_id = calibur.vodkalibur.GetAdjustedCharID(char_id)
+
             if calibur.IsUsingCreation() then
                 local name = calibur.GetCharacterName()
                 if calibur.text.IsAllUppercase(name) then
@@ -87,7 +90,7 @@ local function get_activity_info()
                 presence.smallImageKey = "999"
                 presence.smallImageText = string.format("%s (%s)", name, style)
             else
-                presence.smallImageKey = char_id
+                presence.smallImageKey = string.lower(char_id)
                 presence.smallImageText = calibur.structs.GetCharacterText(char_id)
             end
         end
@@ -98,7 +101,8 @@ local function get_activity_info()
     -- In Character Select
     if level_name == "Creation" then
         return {
-            state = "Character Creation"
+            state = "Character Creation",
+            startTimestamp = os.time(),
         }
     end
 
@@ -123,4 +127,5 @@ RegisterHook("/Script/Engine.PlayerController:ClientRestart", function()
     end)
 end)
 
+math.randomseed(os.time())
 calibur.discord.Initialise(1430288174047039510, 544750)

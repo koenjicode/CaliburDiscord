@@ -33,10 +33,23 @@ Structs.characters = {
     [98] = "Groh",
     [100] = "Azwel",
     [101] = "Geralt",
-    [102] = "Lesser Lizardman",
+    [102] = "Lizardman",
     [103] = "Evil Kilik",
     [104] = "Evil Grøh",
     [105] = "Boss Azwel",
+}
+
+Structs.vodka_characters = {
+    ["5_VV"]  = "Natsu",
+    ["6_VV"]  = "Pyrrha",
+    ["7_VV"]  = "Ashlotte",
+    ["13_VV"] = "Leixia",
+    ["14_VV"] = "Shura",
+    ["23_VV"] = "Patroklos",
+    ["96_VV"] = "Viola",
+    ["97_VV"] = "Lightning",
+    ["98_VV"] = "Kestrel",
+    ["102_VV"] = "Aeon"
 }
 
 Structs.blacklisted = {
@@ -109,7 +122,8 @@ function Structs.IsBlacklisted(id)
 end
 
 function Structs.GetCharacterText(id)
-    return Structs.characters[id] or ("Unknown Character [" .. tostring(id) .. "]")
+    local name = Structs.characters[id] or Structs.vodka_characters[id]
+    return name or ("Unknown Character [" .. tostring(id) .. "]")
 end
 
 function Structs.GetStageText(level)
