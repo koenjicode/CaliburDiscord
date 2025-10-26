@@ -5,7 +5,7 @@ local vodkalibur = {}
 
 local vodka_extension = "_VV"
 
--- Mapping of base character IDs → Vodkalibur replacements
+-- Base character IDs to VodkaVerse Replacements
 vodkalibur.CharacterMap = {
     [6]  = "ProjectPyrrha",        -- Sophitia
     [5]  = "Astral Ninjutsu II",   -- Voldo
@@ -18,11 +18,12 @@ vodkalibur.CharacterMap = {
     [14] = "Demonic Deviant"       -- Cervantes
 }
 
--- 🔧 Get the VodkaVerse mod directory path relative to this script
+-- Get the VodkaVerse folder.
 function vodkalibur.GetVodkaVersePath()
     return IterateGameDirectories().Game.Content.Paks["~mods"].VodkaVerse
 end
 
+-- Check if an replacement is there based on the loaded files.
 function vodkalibur.HasReplacement(char_id)
     local folder = vodkalibur.GetVodkaVersePath()
     if not folder then return false end
@@ -40,7 +41,7 @@ function vodkalibur.HasReplacement(char_id)
     return false
 end
 
--- Returns adjusted char_id if a Vodkalibur mod exists
+-- Potentially pull an adjusted Character ID based on the replacements.
 function vodkalibur.GetAdjustedCharID(char_id)
     if vodkalibur.HasReplacement(char_id) then
         local vv_id = tostring(char_id) .. vodka_extension

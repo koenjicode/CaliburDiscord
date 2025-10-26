@@ -1,7 +1,7 @@
 -- modules/Structs.lua
 local Structs = {}
 
--- Character IDs (decimal, sparse mapping for direct lookups)
+-- Character IDs (decimal)
 Structs.characters = {
     [1] = "Mitsurugi",
     [2] = "Seong Mi-Na",
@@ -39,6 +39,7 @@ Structs.characters = {
     [105] = "Boss Azwel",
 }
 
+-- VodkaVerse Character IDs (decimal)
 Structs.vodka_characters = {
     ["5_VV"]  = "Natsu",
     ["6_VV"]  = "Pyrrha",
@@ -52,6 +53,7 @@ Structs.vodka_characters = {
     ["102_VV"] = "Aeon"
 }
 
+-- Show question mark image for blacklisted entries.
 Structs.blacklisted = {
     45,  -- Creation
     102, -- Lesser Lizardman
@@ -60,7 +62,7 @@ Structs.blacklisted = {
     105, -- Boss Azwel
 }
 
--- Stage Indexes (string keys for lookup by level name)
+-- Stage Indexes
 Structs.stages = {
     STG001 = "Shrine of Eurydice: Cloud Sanctuary",
     STG002 = "Ostrheinsburg Castle: Hall of the Chosen",
@@ -87,6 +89,7 @@ Structs.stages = {
     STG017_V = "Murakumo Shrine Grounds (Night)",
 }
 
+-- Battle states (currently unused)
 Structs.battle_states = {
     [0]  = "EBM_DUMMY",
     [1]  = "EBM_START",
@@ -111,7 +114,7 @@ Structs.battle_states = {
     [20] = "EBM_SHORT_REPLAY",
 }
 
--- Helper functions
+
 function Structs.IsBlacklisted(id)
     for _, blockedId in ipairs(Structs.blacklisted) do
         if blockedId == id then
@@ -131,7 +134,7 @@ function Structs.GetStageText(level)
 end
 
 function Structs.GetBattleState(value)
-    return Structs.battle_states[value] or "Unknown"
+    return Structs.battle_states[value] or "Unknown State"
 end
 
 return Structs
