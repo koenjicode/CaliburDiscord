@@ -1,6 +1,12 @@
 local discordRPC = require("discord_rpc")
 local discord = {}
 
+-- Mod version.
+local mod_version = "v1.0"
+
+-- Pick a random key between "main1" and "main2"
+local random_image_index = math.random(1, 2)
+
 -- Store the last known presence
 local lastPresence = {}
 
@@ -20,6 +26,11 @@ local function HasPresenceChanged(new, old)
 end
 
 function discord.UpdatePresence(newPresence)
+    if not newPresence.largeImageKey then
+        newPresence.largeImageKey = random_image_index == 1 and "main1" or "main2"
+        newPresence.largeImageText = "CaliburDiscord " .. mod_version
+    end
+
     -- Only update if something actually changed
     if not HasPresenceChanged(newPresence, lastPresence) then
         return -- no change, skip
