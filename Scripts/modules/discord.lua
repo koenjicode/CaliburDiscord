@@ -1,8 +1,9 @@
 local discordRPC = require("discord_rpc")
+local vodkalibur = require("modules.vodkalibur")
 local discord = {}
 
 -- Mod version.
-local mod_version = "v1.01.02"
+local mod_version = "v1.02.00"
 
 -- Pick a random key between "main1" and "main2"
 local random_image_index = math.random(1, 2)
@@ -27,7 +28,11 @@ end
 
 function discord.UpdatePresence(newPresence)
     if not newPresence.largeImageKey then
-        newPresence.largeImageKey = random_image_index == 1 and "main1" or "main2"
+        if vodkalibur.IsVodkaPatchInstalled() then
+            newPresence.largeImageKey = "mainvv"
+        else
+            newPresence.largeImageKey = random_image_index == 1 and "main1" or "main2"
+        end
         newPresence.largeImageText = "CaliburDiscord " .. mod_version
     end
 

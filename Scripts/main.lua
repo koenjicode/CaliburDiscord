@@ -8,16 +8,12 @@ local function get_activity_info()
     -- In a Battle
     if string.match(level_name, "^STG") then
         local player_index = calibur.GetPlayerSide()
-        print(string.format("Player Side: %s", player_index))
         local char_id = nil
 
         -- Only run character logic if the player is not local
         if player_index > 0 then
             local character = calibur.GetBattleCharacter(player_index)
-            print(character:GetFullName())
-
             char_id = calibur.character.GetCharacterID(character)
-            print(char_id)
         end
 
         local network_environment = nil
