@@ -8,6 +8,7 @@ CaliburDiscord is a Lua-based plugin that adds Discord Rich Presence integration
 - Displays current battle mode (Training, Local Versus, Story, Libra, etc.)
 - Shows Character and Stage information dynamically based on the chosen side.
 - Supports the detection of Local Versus, CPU Battles, Replays and even Mock Battles
+- Support VodkaVerse characters (Natsu, Viola, Leixia, Kestrel, etc.)
 
 ## Requirements
 
@@ -16,12 +17,14 @@ CaliburDiscord is a Lua-based plugin that adds Discord Rich Presence integration
 You must download the latest experimental-latest build [here](https://github.com/UE4SS-RE/RE-UE4SS/tree/experimental-latest).
 
 ## Installation
+### If you're installing CaliburDiscord from Releases
+It comes pre-packaged with UE4SS.
+- Download the latest release and drop it into: `SoulcaliburVI\Binaries\Win64\`
+### If you have a pre-existing install of UE4SS
+- Take only the CaliburDiscord folder, located `ue4ss\Mods`
+- Place it in your pre-existing UE4SS Mods folder.
 
-- Download and install [UE4SS (experimental-latest)](https://github.com/UE4SS-RE/RE-UE4SS/tree/experimental-latest).
-- Place the CaliburDiscord plugin folder into your `SoulcaliburVI\Binaries\Win64\ue4ss\Mods\CaliburDiscord` directory (needs to be inside of a CaliburDiscord folder)
-- Launch the game: Discord Rich Presence will initialise automatically when a battle starts.
-
-You should now see SOULCALIBUR VI activity on your Discord profile!
+Launch the game, the Discord Game SDK should initialise, and you should now see SOULCALIBUR VI activity on your Discord profile!
 
 ## Notes
 
