@@ -9,12 +9,12 @@ local vodka_extension = "_VV"
 vodkalibur.CharacterMap = {
     [6]  = "ProjectPyrrha",        -- Sophitia
     [5]  = "Astral Ninjutsu II",   -- Voldo
-    [60] = "Ars Planetarum",       -- 2B
-    [62] = "CodenameKESTREL",      -- Groh
+    [96] = "Ars Planetarum",       -- 2B
+    [98] = "CodenameKESTREL",      -- Groh
     [13] = "Yan Leixia",           -- Xianghua
-    [61] = "Lightning",            -- Haohmaru
+    [97] = "Lightning",            -- Haohmaru
     [7]  = "Rekindled Clockwork",  -- Siegfried
-    [17] = "Misguided Justice",    -- Cassandra
+    [23] = "Misguided Justice",    -- Cassandra
     [14] = "Demonic Deviant"       -- Cervantes
 }
 
