@@ -2,7 +2,7 @@ local discordRPC = require("discord_rpc")
 local discord = {}
 
 -- Mod version.
-local mod_version = "v1.01.01"
+local mod_version = "v1.01.02"
 
 -- Pick a random key between "main1" and "main2"
 local random_image_index = math.random(1, 2)
