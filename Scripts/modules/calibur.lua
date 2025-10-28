@@ -34,6 +34,15 @@ function Calibur.GetLevelName()
     return full_name:match("%.(.-):PersistentLevel")
 end
 
+function Calibur.IsBattleMap(level_name)
+    return string.match(level_name, "^STG")
+end
+
+function Calibur.IsMatch()
+    local level_name = Calibur.GetLevelName()
+    return Calibur.IsBattleMap(level_name)
+end
+
 function Calibur.IsTrainingMode()
     local bs = Calibur.GetBattleSetup()
     return bs.bEndless

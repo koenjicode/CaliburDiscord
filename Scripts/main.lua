@@ -1,12 +1,10 @@
 local calibur = require("modules.calibur")
 
-local preview_character_present = false
-
 local function get_activity_info()
     local level_name = calibur.GetLevelName()
 
     -- In a Battle
-    if string.match(level_name, "^STG") then
+    if calibur.IsBattleMap(level_name) then
         local player_index = calibur.GetPlayerSide()
         local char_id = nil
 
@@ -115,11 +113,19 @@ local function get_activity_info()
     }
 end
 
-RegisterHook("/Script/Engine.PlayerController:ClientRestart", function()
-    preview_character_present = false
+NotifyOnNewObject("/Script/LuxorGame.LuxBattleManager", function(ConstructedObject)
     ExecuteWithDelay(1000, function()
-        print(calibur.GetLevelName())
+        print(string.format("Battle Manager created: %s", ConstructedObject:GetFullName()))
         calibur.discord.UpdatePresence(get_activity_info())
+    end)
+end)
+
+RegisterHook("/Script/Engine.PlayerController:ClientRestart", function()
+    -- We update match stuff based on the battle manager.
+    ExecuteWithDelay(1000, function()
+        if not calibur.IsMatch() then
+            calibur.discord.UpdatePresence(get_activity_info())
+        end
     end)
 end)
 
